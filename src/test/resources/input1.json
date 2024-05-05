@@ -1,0 +1,12 @@
+{
+  "problems": [
+    {
+      "hash": "123abc",
+      "data": ["Error in line 10", "Critical"]
+    },
+    {
+      "hash": "456def",
+      "data": ["Warning in line 20", "Minor"]
+    }
+  ]
+}
