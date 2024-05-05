@@ -1,7 +1,30 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import kotlin.system.exitProcess
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    try {
+        val firstFilePath = requestFilePath("Please enter the first file path:")
+        val secondFilePath = requestFilePath("Please enter the second file path:")
+        val outputOnlyInFirstFilePath = requestFilePath("Enter output path for problems only in the first analysis:")
+        val outputOnlyInSecondFilePath = requestFilePath("Enter output path for problems only in the second analysis:")
+        val outputInBothFilePath = requestFilePath("Enter output path for common problems:")
+
+        AnalysisProcessor().process(
+            firstFilePath,
+            secondFilePath,
+            outputOnlyInFirstFilePath,
+            outputOnlyInSecondFilePath,
+            outputInBothFilePath
+        )
+    } catch (e: Exception) {
+        println(e.message)
+        exitProcess(1)
+    }
+}
+
+fun requestFilePath(prompt: String): String {
+    println(prompt)
+    return readlnOrNull()?.trim()?.takeUnless { it.isEmpty() } ?: run {
+        println("Error: Invalid file path.")
+        exitProcess(1)
+    }
 }
